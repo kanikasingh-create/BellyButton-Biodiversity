@@ -43,7 +43,6 @@ function init() {var selector = d3.select("#selDataset");
     
     //Parse and read in JSON file.
     d3.json("samples.json").then((data) => {
-
     var sampledata = data.samples;
     var sampleresults = sampledata.filter(sampleObj => sampleObj.id == sample);
     var Result = sampleresults[0];
@@ -74,16 +73,15 @@ function init() {var selector = d3.select("#selDataset");
 
     //Create gauge chart.
     var trace3 = {
-    title: { text: "Frequency of Washing Belly Button" },
+    title: { text: "Belly Button Washing Frequency", font: {size: 24}},
     type: "indicator",
     value: wfreq,
-    mode: "gauge", 
-    gauge:{axis:{visible:true,range:[0,10]}}
-    // Add markers: [{type:"area",range:[0,1],"backgroundcolor":"white"}]
-    };
+    mode: "gauge+number+delta", 
+    gauge: {axis:{visible:true,range:[0,9]}}, steps:[{range: [0, 1], color: "cornsilk"}, {range: [1, 2], color: "linen"}, {range: [2, 3], color: "beige"}, {range: [3, 4], color: "blanchedalmond"}, {range: [4, 5], color: "bisque"}, {range: [5, 6], color: "antiquewhite"}, {range: [6, 7], color: "burlywood"}, {range: [7, 8], color: "lightsalmon"}, {range: [8, 9], color: "darksalmon"}
+  ]};
 
     var data3 = [trace3]
-    var layout3 = { width: 600, height: 400, margin: { t: 0, b: 0 }};
+    var layout3 = { width: 600, height: 450, margin: { t: 0, b: 0 }};
     Plotly.newPlot("gauge", data3, layout3);
 
   });
